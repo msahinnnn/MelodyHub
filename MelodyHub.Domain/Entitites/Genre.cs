@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace MelodyHub.Domain.Entitites
 {
-    public class Song : BaseEntity
+    public class Genre : BaseEntity
     {
         public string Name { get; set; }
-        public string Lyrics { get; set; }
-        public int AlbumId { get; set; }
-        public Album Album { get; set; }
+        public ICollection<Album> Albums { get; set; }
     }
 }

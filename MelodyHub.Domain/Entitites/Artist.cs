@@ -10,7 +10,7 @@ namespace MelodyHub.Domain.Entitites
     public class Artist : BaseEntity
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string About { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Album> Albums { get; set; }
     }

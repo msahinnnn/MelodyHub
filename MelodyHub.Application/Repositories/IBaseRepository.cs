@@ -1,4 +1,5 @@
 ﻿using MelodyHub.Domain.Entitites.Cammon;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,25 @@ namespace MelodyHub.Application.Repositories
     {
         Task<BaseEntity> GetByIdAsync(int id);
         Task<IEnumerable<BaseEntity>> GetAllAsync();
-        Task<IEnumerable<BaseEntity>> FindAsync(
-            Expression<Func<BaseEntity, bool>> predicate,
-            Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
-            int? skip = null,
-            int? take = null);
+
+        Task<IEnumerable<TResult>> FindAsync<TResult>(
+         Expression<Func<BaseEntity, bool>> predicate,
+         Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
+         int? skip = null,
+         int? take = null,
+         Expression<Func<BaseEntity, TResult>> select = null,
+         params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes);
+
+
+        Task<BaseEntity> FirstAsync(
+        Expression<Func<BaseEntity, bool>> predicate,
+        Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
+        params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes);
+
+
         Task AddAsync(BaseEntity entity);
         Task UpdateAsync(BaseEntity entity);
         Task DeleteAsync(int id);
+        Task<bool> ExistsAsync(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MelodyHub.Application.Repositories;
 using MelodyHub.Domain.Entitites.Cammon;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,31 +32,75 @@ namespace MelodyHub.Persistence.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<IEnumerable<BaseEntity>> FindAsync(
-            Expression<Func<BaseEntity, bool>> predicate,
-            Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
-            int? skip = null,
-            int? take = null)
+        public async Task<IEnumerable<TResult>> FindAsync<TResult>(
+        Expression<Func<BaseEntity, bool>> predicate,
+        Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
+        int? skip = null,
+        int? take = null,
+        Expression<Func<BaseEntity, TResult>> select = null,
+        params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes)
         {
-            IQueryable<BaseEntity> query = _dbSet.Where(predicate);
+            IQueryable<BaseEntity> query = _dbSet;
 
+            // Includes
+            foreach (var include in includes)
+            {
+                query = include(query);
+            }
+
+            // Filtering
+            query = query.Where(predicate);
+
+            // Order
             if (orderBy != null)
             {
                 query = orderBy(query);
             }
 
+            // Paging
             if (skip.HasValue)
             {
                 query = query.Skip(skip.Value);
             }
-
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
             }
 
-            return await query.ToListAsync();
+            // Select
+            if (select != null)
+            {
+                return await query.Select(select).ToListAsync();
+            }
+            else
+            {
+                return (await query.ToListAsync()).Cast<TResult>();
+            }
         }
+
+
+        public async Task<BaseEntity> FirstAsync(
+        Expression<Func<BaseEntity, bool>> predicate,
+        Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
+        params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes)
+        {
+            IQueryable<BaseEntity> query = _dbSet;
+
+            foreach (var include in includes)
+            {
+                query = include(query);
+            }
+
+            query = query.Where(predicate);
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return await query.FirstOrDefaultAsync();
+        }
+
+
 
         public async Task AddAsync(BaseEntity entity)
         {
@@ -73,10 +118,18 @@ namespace MelodyHub.Persistence.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var entity = await GetByIdAsync(id);
-            if (entity == null) throw new InvalidOperationException($"Entity with ID: {id} not found.");
+            if (!await ExistsAsync(id))
+            {
+                throw new InvalidOperationException($"Entity with ID: {id} not found.");
+            }
+            var entity = await _dbSet.FindAsync(id);
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await _dbSet.AnyAsync(e => EF.Property<int>(e, "Id") == id);
         }
     }
 }

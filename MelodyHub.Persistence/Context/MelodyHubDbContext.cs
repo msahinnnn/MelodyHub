@@ -21,7 +21,23 @@ namespace MelodyHub.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           
+           //builder.Entity<Album>()
+           //     .HasOne(a => a.Artist)
+           //     .WithMany(a => a.Albums)
+           //     .HasForeignKey(a => a.ArtistId);
+
+           // builder.Entity<Artist>()
+           //     .HasMany(a => a.Albums)
+           //     .WithOne(a => a.Artist)
+           //     .HasForeignKey(a => a.ArtistId);
+
+           // builder.Entity<Song>()
+           //     .HasOne(s => s.Album)
+           //     .WithMany(s => s.Songs)
+           //     .HasForeignKey(s => s.AlbumId);
+
+            
+
             base.OnModelCreating(builder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
