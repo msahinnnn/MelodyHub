@@ -1,3 +1,3 @@
 # MelodyHub
 
-![Proje Ekran Görüntüsü](Adsız-2024-03-30-1427.png)
+![Proje Ekran Görüntüsü](https://github.com/msahinnnn/MelodyHub/blob/master/docs/playlist.png)
