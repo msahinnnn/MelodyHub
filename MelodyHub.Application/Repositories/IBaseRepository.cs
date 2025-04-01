@@ -14,7 +14,7 @@ namespace MelodyHub.Application.Repositories
         Task<BaseEntity> GetByIdAsync(int id);
         Task<IEnumerable<BaseEntity>> GetAllAsync();
 
-        Task<IEnumerable<TResult>> FindAsync<TResult>(
+        Task<IEnumerable<TResult>> GetAsync<TResult>(
          Expression<Func<BaseEntity, bool>> predicate,
          Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
          int? skip = null,
@@ -29,9 +29,9 @@ namespace MelodyHub.Application.Repositories
         params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes);
 
 
-        Task AddAsync(BaseEntity entity);
-        Task UpdateAsync(BaseEntity entity);
-        Task DeleteAsync(int id);
+        Task<BaseEntity> AddAsync(BaseEntity entity);
+        Task<BaseEntity> UpdateAsync(BaseEntity entity);
+        Task<BaseEntity> DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
     }
 }

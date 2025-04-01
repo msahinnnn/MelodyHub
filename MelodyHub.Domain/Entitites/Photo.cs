@@ -15,10 +15,9 @@ namespace MelodyHub.Domain.Entitites
 
     public enum PhotoType
     {
-        AlbumCover,
-        ArtistProfile,
-        ArtistBanner,
-        UserProfile,
-        UserBanner
+        Profile,  
+        Banner,     
+        Playlist,   
+        Album       
     }
 }

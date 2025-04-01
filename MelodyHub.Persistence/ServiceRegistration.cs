@@ -1,7 +1,10 @@
 ﻿using MelodyHub.Application.Abstractions.Services;
 using MelodyHub.Application.Repositories;
+using MelodyHub.Persistence.Context;
 using MelodyHub.Persistence.Repositories;
 using MelodyHub.Persistence.Service;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,8 +16,11 @@ namespace MelodyHub.Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceServices(this IServiceCollection services)
+        public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<MelodyHubDbContext>(options =>
+             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddScoped<IAlbumRepository, AlbumRepository>();
             services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<IArtistRepository, ArtistRepository>();
@@ -24,20 +30,20 @@ namespace MelodyHub.Persistence
             services.AddScoped<ISongService, SongService>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IPhotoService, PhotoService>();
+        
 
 
-           
-            //services.AddIdentity<AppUser, AppRole>(options =>
-            //{
-            //    options.Password.RequiredLength = 3;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireLowercase = false;
-            //    options.Password.RequireUppercase = false;
-            //}).AddEntityFrameworkStores<MelodyHubDbContext>()
-            //.AddDefaultTokenProviders();
+        //services.AddIdentity<AppUser, AppRole>(options =>
+        //{
+        //    options.Password.RequiredLength = 3;
+        //    options.Password.RequireNonAlphanumeric = false;
+        //    options.Password.RequireDigit = false;
+        //    options.Password.RequireLowercase = false;
+        //    options.Password.RequireUppercase = false;
+        //}).AddEntityFrameworkStores<MelodyHubDbContext>()
+        //.AddDefaultTokenProviders();
 
-          
-        }
+
+    }
     }
 }

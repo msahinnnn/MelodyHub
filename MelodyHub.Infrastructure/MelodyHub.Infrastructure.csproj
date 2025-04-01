@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Storage\" />
+    <ProjectReference Include="..\MelodyHub.Application\MelodyHub.Application.csproj" />
   </ItemGroup>
 
 </Project>

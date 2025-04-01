@@ -32,7 +32,7 @@ namespace MelodyHub.Persistence.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<IEnumerable<TResult>> FindAsync<TResult>(
+        public async Task<IEnumerable<TResult>> GetAsync<TResult>(
         Expression<Func<BaseEntity, bool>> predicate,
         Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
         int? skip = null,
@@ -102,21 +102,23 @@ namespace MelodyHub.Persistence.Repositories
 
 
 
-        public async Task AddAsync(BaseEntity entity)
+        public async Task<BaseEntity> AddAsync(BaseEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task UpdateAsync(BaseEntity entity)
+        public async Task<BaseEntity> UpdateAsync(BaseEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<BaseEntity> DeleteAsync(int id)
         {
             if (!await ExistsAsync(id))
             {
@@ -125,6 +127,7 @@ namespace MelodyHub.Persistence.Repositories
             var entity = await _dbSet.FindAsync(id);
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
         public async Task<bool> ExistsAsync(int id)

@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MelodyHub.Infrastructure\MelodyHub.Infrastructure.csproj" />
     <ProjectReference Include="..\MelodyHub.Persistence\MelodyHub.Persistence.csproj" />
   </ItemGroup>
 

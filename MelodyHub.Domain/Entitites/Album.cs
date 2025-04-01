@@ -10,6 +10,7 @@ namespace MelodyHub.Domain.Entitites
     public class Album : BaseEntity
     {
         public string Name { get; set; }
+        public string Url { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int PhotoId { get; set; }  
         public Photo Photo { get; set; }
