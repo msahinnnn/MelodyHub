@@ -23,4 +23,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MelodyHub.Persistence\MelodyHub.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
