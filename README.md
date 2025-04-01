@@ -1,3 +1,3 @@
 # MelodyHub
 
-![Proje Ekran Görüntüsü](playlist.png)
+![Proje Ekran Görüntüsü](https://github.com/msahinnnn/MelodyHub/blob/master/docs/playlist.png)
