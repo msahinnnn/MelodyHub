@@ -11,6 +11,7 @@ namespace MelodyHub.Domain.Entitites
     {
         public string Name { get; set; }
         public string Lyrics { get; set; }
+        public string Duration { get; set; }
         public int AlbumId { get; set; }
         public Album Album { get; set; }
     }
