@@ -29,9 +29,9 @@ namespace MelodyHub.Persistence.Service
             return await _photoRepository.DeleteAsync(id);
         }
 
-        public async Task<IEnumerable<Photo>> GetAllPhotos()
+        public async Task<IEnumerable<Photo>> GetAllPhotos(int skip, int take)
         {
-            return await _photoRepository.GetAllAsync();
+            return await _photoRepository.GetAsync(x => true, skip: skip, take: take);
         }
 
         public async Task<Photo> GetPhotoById(int id)
@@ -39,9 +39,9 @@ namespace MelodyHub.Persistence.Service
             return await _photoRepository.GetByIdAsync(id);
         }
 
-        public async Task<Photo> GetPhotoByParentId(int id)
+        public async Task<IEnumerable<Photo>> GetPhotosByParentId(int id)
         {
-            return await _photoRepository.FirstAsync(x => x.ParentId == id);
+            return await _photoRepository.GetAsync(x => x.ParentId == id);
         }
 
         public async Task<Photo> GetPhotoByUrl(string url)

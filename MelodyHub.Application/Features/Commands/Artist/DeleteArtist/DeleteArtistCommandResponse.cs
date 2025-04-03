@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MelodyHub.Application.Abstractions.Secrets
+namespace MelodyHub.Application.Features.Commands.Artist.DeleteArtist
 {
-    public interface ISecretManagerService
+    public class DeleteArtistCommandResponse
     {
     }
 }

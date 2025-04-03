@@ -9,9 +9,9 @@ namespace MelodyHub.Application.Abstractions.Services
 {
     public interface IPhotoService
     {
-        public Task<IEnumerable<Photo>> GetAllPhotos();
+        public Task<IEnumerable<Photo>> GetAllPhotos(int skip, int take);
         public Task<Photo> GetPhotoById(int id);
-        public Task<Photo> GetPhotoByParentId(int id);
+        public Task<IEnumerable<Photo>> GetPhotosByParentId(int id);
         public Task<Photo> GetPhotoByUrl(string url);
 
 

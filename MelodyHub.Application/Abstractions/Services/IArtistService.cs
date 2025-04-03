@@ -9,7 +9,7 @@ namespace MelodyHub.Application.Abstractions.Services
 {
     public interface IArtistService
     {
-        public Task<IEnumerable<Artist>> GetAllArtists();
+        public Task<IEnumerable<Artist>> GetAllArtists(int skip, int take);
         public Task<Artist> GetArtistById(int artistId);
         public Task<Artist> GetArtistByUrl(string artistUrl);
 

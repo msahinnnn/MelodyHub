@@ -9,9 +9,8 @@ namespace MelodyHub.Application.Abstractions.Services
 {
     public interface ISongService
     {
-        public Task<IEnumerable<Song>> GetAllSongs();
-        public Task<IEnumerable<Song>> GetSongsByListId(int ListId);
-        public Task<IEnumerable<Song>> GetSongsByAlbumId(int albumId);
+        public Task<IEnumerable<Song>> GetAllSongs(int skip, int take);
+        public Task<IEnumerable<Song>> GetSongsByAlbumId(int albumId, int skip, int take);
         public Task<Song> GetSongById(int songId);
         public Task<Song> GetSongByUrl(string url);
         public Task<Song> GetSongByName(string name);

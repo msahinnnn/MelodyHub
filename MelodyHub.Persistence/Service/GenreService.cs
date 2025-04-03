@@ -29,9 +29,12 @@ namespace MelodyHub.Persistence.Service
             return await _genreRepository.DeleteAsync(id);
         }
 
-        public async Task<IEnumerable<Genre>> GetAllGenres()
+        public async Task<IEnumerable<Genre>> GetAllGenres(int skip, int take)
         {
-            return await _genreRepository.GetAllAsync();
+            return await _genreRepository.GetAsync(x => true,
+                skip: skip,
+                take: take
+                );
         }
 
         public async Task<Genre> GetGenreById(int id)

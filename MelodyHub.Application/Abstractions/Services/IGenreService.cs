@@ -9,7 +9,7 @@ namespace MelodyHub.Application.Abstractions.Services
 {
     public interface IGenreService
     {
-        public Task<IEnumerable<Genre>> GetAllGenres();
+        public Task<IEnumerable<Genre>> GetAllGenres(int skip, int take);
         public Task<Genre> GetGenreById(int id);
         public Task<Genre> GetGenreByUrl(string url);
         public Task<Genre> GetGenreByName(string name);

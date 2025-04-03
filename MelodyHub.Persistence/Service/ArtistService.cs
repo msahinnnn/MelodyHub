@@ -29,9 +29,12 @@ namespace MelodyHub.Persistence.Service
             return await _artistRepository.DeleteAsync(artistId);
         }
 
-        public async Task<IEnumerable<Artist>> GetAllArtists()
+        public async Task<IEnumerable<Artist>> GetAllArtists(int skip, int take)
         {
-            return await _artistRepository.GetAllAsync();
+            return await _artistRepository.GetAsync( x=> true,
+                skip: skip,
+                take: take
+                );
         }
 
         public async Task<Artist> GetArtistById(int artistId)

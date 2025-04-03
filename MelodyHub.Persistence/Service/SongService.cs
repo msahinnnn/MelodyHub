@@ -31,9 +31,11 @@ namespace MelodyHub.Persistence.Service
             return _songRepository.DeleteAsync(songId);
         }
 
-        public Task<IEnumerable<Song>> GetAllSongs()
+        public Task<IEnumerable<Song>> GetAllSongs(int skip, int take)
         {
-            return _songRepository.GetAllAsync();
+            return _songRepository.GetAsync(x=>true,
+                skip: skip,
+                take: take);
         }
 
         public Task<Song> GetSongById(int songId)
@@ -51,16 +53,13 @@ namespace MelodyHub.Persistence.Service
             return _songRepository.FirstAsync(x => x.Url == url);
         }
 
-        public Task<IEnumerable<Song>> GetSongsByAlbumId(int albumId)
+        public Task<IEnumerable<Song>> GetSongsByAlbumId(int albumId, int skip, int take)
         {
-            return _songRepository.GetAsync(x => x.AlbumId == albumId);
+            return _songRepository.GetAsync(x => x.AlbumId == albumId,
+                skip: skip,
+                take: take
+            );
         }
-
-        public Task<IEnumerable<Song>> GetSongsByListId(int ListId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Song> UpdateSong(Song song)
         {
             return await _songRepository.UpdateAsync(song);

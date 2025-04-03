@@ -47,19 +47,27 @@ namespace MelodyHub.Persistence.Service
             return await _albumRepository.FirstAsync(x => x.Url == url);
         }
 
-        public async Task<IEnumerable<Album>> GetAlbumsByArtistId(int artistId)
+        public async Task<IEnumerable<Album>> GetAlbumsByArtistId(int artistId, int skip, int take)
         {
-            return await _albumRepository.GetAsync(x => x.ArtistId == artistId);
+            return await _albumRepository.GetAsync(x => x.ArtistId == artistId,
+                skip: skip,
+                take: take
+            );
         }
 
-        public async Task<IEnumerable<Album>> GetAlbumsByGenreId(int id)
+        public async Task<IEnumerable<Album>> GetAlbumsByGenreId(int id, int skip, int take)
         {
-            return await _albumRepository.GetAsync(x => x.GenreId == id);
+            return await _albumRepository.GetAsync(x => x.GenreId == id,
+                skip: skip,
+                take: take);
         }
 
-        public async Task<IEnumerable<Album>> GetAllAlbums()
+        public async Task<IEnumerable<Album>> GetAllAlbums(int skip, int take)
         {
-            return await _albumRepository.GetAllAsync();
+            return await _albumRepository.GetAsync( x => true,
+                skip: skip,
+                take: take
+                );
         }
 
         public async Task<Album> UpdateAlbum(Album album)
