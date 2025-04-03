@@ -11,27 +11,24 @@ namespace MelodyHub.Application.Repositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        Task<BaseEntity> GetByIdAsync(int id);
-        Task<IEnumerable<BaseEntity>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
 
-        Task<IEnumerable<TResult>> GetAsync<TResult>(
-         Expression<Func<BaseEntity, bool>> predicate,
-         Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
-         int? skip = null,
-         int? take = null,
-         Expression<Func<BaseEntity, TResult>> select = null,
-         params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes);
+        Task<IEnumerable<T>> GetAsync(
+            Expression<Func<T, bool>> predicate,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            int? skip = null,
+            int? take = null,
+            params Func<IQueryable<T>, IIncludableQueryable<T, object>>[] includes);
 
+        Task<T> FirstAsync(
+            Expression<Func<T, bool>> predicate,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            params Func<IQueryable<T>, IIncludableQueryable<T, object>>[] includes);
 
-        Task<BaseEntity> FirstAsync(
-        Expression<Func<BaseEntity, bool>> predicate,
-        Func<IQueryable<BaseEntity>, IOrderedQueryable<BaseEntity>> orderBy = null,
-        params Func<IQueryable<BaseEntity>, IIncludableQueryable<BaseEntity, object>>[] includes);
-
-
-        Task<BaseEntity> AddAsync(BaseEntity entity);
-        Task<BaseEntity> UpdateAsync(BaseEntity entity);
-        Task<BaseEntity> DeleteAsync(int id);
+        Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+        Task<T> DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
     }
 }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MelodyHub.Persistence.Migrations
 {
     [DbContext(typeof(MelodyHubDbContext))]
-    [Migration("20250401215429_newPropsAdded")]
-    partial class newPropsAdded
+    [Migration("20250403005911_initialMig")]
+    partial class initialMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,9 +119,13 @@ namespace MelodyHub.Persistence.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MelodyHub.Domain.Entitites.Photo", b =>
@@ -137,6 +141,9 @@ namespace MelodyHub.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("PhotoType")
                         .HasColumnType("integer");

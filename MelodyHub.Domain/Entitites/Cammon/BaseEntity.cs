@@ -10,6 +10,6 @@ namespace MelodyHub.Domain.Entitites.Cammon
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        virtual public DateTime UpdatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

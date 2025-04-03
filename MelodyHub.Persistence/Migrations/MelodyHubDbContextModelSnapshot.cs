@@ -116,9 +116,13 @@ namespace MelodyHub.Persistence.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MelodyHub.Domain.Entitites.Photo", b =>
@@ -134,6 +138,9 @@ namespace MelodyHub.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("PhotoType")
                         .HasColumnType("integer");

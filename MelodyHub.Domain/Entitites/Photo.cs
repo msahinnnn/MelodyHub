@@ -9,6 +9,7 @@ namespace MelodyHub.Domain.Entitites
 {
     public class Photo : BaseEntity
     {
+        public int ParentId { get; set; }
         public string Url { get; set; }
         public PhotoType PhotoType { get; set; }
     }
