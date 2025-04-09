@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MelodyHub.Application.Abstractions.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,20 @@ namespace MelodyHub.Application.Features.Commands.Album.DeleteAlbum
 {
     public class DeleteAlbumCommandHandler : IRequestHandler<DeleteAlbumCommandRequest, DeleteAlbumCommandResponse>
     {
-        public Task<DeleteAlbumCommandResponse> Handle(DeleteAlbumCommandRequest request, CancellationToken cancellationToken)
+        private readonly IAlbumService _albumService;
+
+        public DeleteAlbumCommandHandler(IAlbumService albumService)
         {
-            throw new NotImplementedException();
+            _albumService = albumService;
+        }
+        public async Task<DeleteAlbumCommandResponse> Handle(DeleteAlbumCommandRequest request, CancellationToken cancellationToken)
+        {
+            var response = await _albumService.DeleteAlbum(request.Id);
+
+            return new DeleteAlbumCommandResponse
+            {
+                Album = response
+            };
         }
     }
 

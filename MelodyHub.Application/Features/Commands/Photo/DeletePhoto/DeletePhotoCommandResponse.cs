@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Photo.DeletePhoto
 {
     public class DeletePhotoCommandResponse
     {
+        public object Photo { get; set; }
     }
 }

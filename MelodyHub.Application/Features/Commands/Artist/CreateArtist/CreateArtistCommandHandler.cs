@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using MelodyHub.Application.Abstractions.Services;
+using MelodyHub.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,29 @@ namespace MelodyHub.Application.Features.Commands.Artist.CreateArtist
 {
     public class CreateArtistCommandHandler : IRequestHandler<CreateArtistCommandRequest, CreateArtistCommandResponse>
     {
-        public Task<CreateArtistCommandResponse> Handle(CreateArtistCommandRequest request, CancellationToken cancellationToken)
+        private readonly IArtistService _artistService;
+
+        public CreateArtistCommandHandler(IArtistService artistService)
         {
-            throw new NotImplementedException();
+            _artistService = artistService;
         }
-    }
-    {
+
+        public async Task<CreateArtistCommandResponse> Handle(CreateArtistCommandRequest request, CancellationToken cancellationToken)
+        {
+            var response = await _artistService.CreateArtist(new()
+            {
+                Name = request.Name,
+                About = request.About
+            });
+
+            response.Url = UrlHelper.GetArtistUrl(response.Id);
+
+            var updateUrlRes = await _artistService.UpdateArtist(response);
+
+            return new CreateArtistCommandResponse
+            {
+                Artist = updateUrlRes
+            };
+        }
     }
 }

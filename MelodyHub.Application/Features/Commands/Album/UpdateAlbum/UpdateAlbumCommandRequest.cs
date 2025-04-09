@@ -9,5 +9,7 @@ namespace MelodyHub.Application.Features.Commands.Album.UpdateAlbum
 {
     public class UpdateAlbumCommandRequest : IRequest<UpdateAlbumCommandResponse>
     {
+        public string Name { get; set; }
+        public int GenreId { get; set; }
     }
 }

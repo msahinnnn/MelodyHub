@@ -9,5 +9,6 @@ namespace MelodyHub.Application.Features.Commands.Genre.DeleteGenre
 {
     public class DeleteGenreCommandRequest : IRequest<DeleteGenreCommandResponse>
     {
+        public int GenreId { get; set; }
     }
 }

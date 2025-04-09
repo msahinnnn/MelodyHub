@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Album.DeleteAlbum
 {
     public class DeleteAlbumCommandResponse
     {
+        public object Album { get; set; }
     }
 }

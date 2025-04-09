@@ -92,17 +92,25 @@ namespace MelodyHub.Persistence.Repositories
 
         public async Task<T> AddAsync(T entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-            entity.CreatedDate = DateTime.Now;
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            entity.CreatedDate = DateTime.UtcNow;
+            var res = await _dbSet.AddAsync(entity);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+
             return entity;
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-            entity.UpdatedDate = DateTime.Now;
+            entity.UpdatedDate = DateTime.UtcNow;
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
             return entity;

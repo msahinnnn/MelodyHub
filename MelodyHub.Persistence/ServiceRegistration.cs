@@ -25,25 +25,14 @@ namespace MelodyHub.Persistence
             services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
 
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddScoped<ISongService, SongService>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IPhotoService, PhotoService>();
-        
+            services.AddScoped<IGenreService, GenreService>();
 
-
-        //services.AddIdentity<AppUser, AppRole>(options =>
-        //{
-        //    options.Password.RequiredLength = 3;
-        //    options.Password.RequireNonAlphanumeric = false;
-        //    options.Password.RequireDigit = false;
-        //    options.Password.RequireLowercase = false;
-        //    options.Password.RequireUppercase = false;
-        //}).AddEntityFrameworkStores<MelodyHubDbContext>()
-        //.AddDefaultTokenProviders();
-
-
-    }
+        }
     }
 }

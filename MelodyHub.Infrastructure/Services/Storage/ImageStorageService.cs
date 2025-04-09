@@ -13,16 +13,21 @@ namespace MelodyHub.Infrastructure.Services.Storage
     public class ImageStorageService : IImageStorageService
     {
         private readonly AmazonS3Client _s3Client;
-        private const string BucketName = "";
+        private const string BucketName = "mymelody-hub";
 
         public ImageStorageService()
         {
             _s3Client = new();
         }
 
-        private string GetFileKey(string entityId, EntityStorageType entityType, PhotoType photoType)
+        public string GetBucketName()
         {
-            return entityType switch
+            return BucketName;
+        }
+
+        public string GetFileKey(string entityId, EntityStorageType entityType, PhotoType photoType)
+        {
+            var res = entityType switch
             {
                 EntityStorageType.Users or EntityStorageType.Artists => photoType switch
                 {
@@ -38,6 +43,8 @@ namespace MelodyHub.Infrastructure.Services.Storage
                     : throw new ArgumentException($"Invalid PhotoType '{photoType}' for Albums."),
                 _ => throw new ArgumentException($"Invalid entityType '{entityType}'.")
             };
+
+            return res;
         }
 
         public async Task<Stream> GetPhotoAsync(string entityId, EntityStorageType entityType, PhotoType photoType)
@@ -63,22 +70,23 @@ namespace MelodyHub.Infrastructure.Services.Storage
                 InputStream = inputStream,
                 ContentType = "image/jpeg"
             };
-            await _s3Client.PutObjectAsync(request);
+            var res = await _s3Client.PutObjectAsync(request);
 
             // TODO?: Image resizing.
             // Ex: if (photoType == PhotoType.Playlist) { ResizeImage(inputStream, 300, 300); }
         }
 
-        public async Task UploadPhotoAsync(string entityId, EntityStorageType entityType, PhotoType photoType, Stream inputStream)
+        public async Task<string> UploadPhotoAsync(string entityId, EntityStorageType entityType, PhotoType photoType, Stream inputStream)
         {
             string fileKey = GetFileKey(entityId, entityType, photoType);
             await UploadPhotoAsync(fileKey, inputStream);
+            return fileKey;
         }
 
         public async Task DeletePhotoAsync(string entityId, EntityStorageType entityType, PhotoType photoType)
         {
             string fileKey = GetFileKey(entityId, entityType, photoType);
-            await _s3Client.DeleteObjectAsync(BucketName, fileKey);
+            var res = await _s3Client.DeleteObjectAsync(BucketName, fileKey);
         }
 
        

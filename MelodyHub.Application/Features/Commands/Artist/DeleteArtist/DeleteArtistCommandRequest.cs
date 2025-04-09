@@ -9,5 +9,6 @@ namespace MelodyHub.Application.Features.Commands.Artist.DeleteArtist
 {
     public class DeleteArtistCommandRequest : IRequest<DeleteArtistCommandResponse>
     {
+        public int ArtistId { get; set; }
     }
 }

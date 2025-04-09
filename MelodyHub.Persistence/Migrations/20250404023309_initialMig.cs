@@ -114,6 +114,7 @@ namespace MelodyHub.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Url = table.Column<string>(type: "text", nullable: false),
+                    SongFileUrl = table.Column<string>(type: "text", nullable: false),
                     Lyrics = table.Column<string>(type: "text", nullable: false),
                     Duration = table.Column<string>(type: "text", nullable: false),
                     AlbumId = table.Column<int>(type: "integer", nullable: false),

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MelodyHub.Application.Abstractions.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,26 @@ namespace MelodyHub.Application.Features.Commands.Album.CreateAlbum
 {
     public class CreateAlbumCommandHandler : IRequestHandler<CreateAlbumCommandRequest, CreateAlbumCommandResponse>
     {
-        public Task<CreateAlbumCommandResponse> Handle(CreateAlbumCommandRequest request, CancellationToken cancellationToken)
+        private readonly IAlbumService _albumService;
+
+        public CreateAlbumCommandHandler(IAlbumService albumService)
         {
-            throw new NotImplementedException();
+            _albumService = albumService;
+        }
+
+        public async Task<CreateAlbumCommandResponse> Handle(CreateAlbumCommandRequest request, CancellationToken cancellationToken)
+        {
+            var response = await _albumService.CreateAlbum(new()
+            {
+                Name = request.Name,
+                ArtistId = request.ArtistId,
+                GenreId = request.GenreId
+            });
+
+            return new CreateAlbumCommandResponse
+            {
+                Album = response
+            };
         }
     }
 

@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Photo.CreatePhoto
 {
     public class CreatePhotoCommandResponse
     {
+        public object Photo { get; set; } 
     }
 }

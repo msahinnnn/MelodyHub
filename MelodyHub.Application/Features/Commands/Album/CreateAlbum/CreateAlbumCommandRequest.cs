@@ -10,6 +10,8 @@ namespace MelodyHub.Application.Features.Commands.Album.CreateAlbum
 {
     public class CreateAlbumCommandRequest : IRequest<CreateAlbumCommandResponse>
     {
-        
+        public string Name { get; set; }
+        public int ArtistId { get; set; }
+        public int GenreId { get; set; }
     }
 }

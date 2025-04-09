@@ -9,5 +9,6 @@ namespace MelodyHub.Application.Features.Commands.Album.DeleteAlbum
 {
     public class DeleteAlbumCommandRequest : IRequest<DeleteAlbumCommandResponse>
     {
+        public int Id { get; set; }
     }
 }

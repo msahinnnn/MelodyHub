@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using MelodyHub.Application.Abstractions.Services;
+using MelodyHub.Application.Features.Commands.Artist.CreateArtist;
+using MelodyHub.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,29 @@ namespace MelodyHub.Application.Features.Commands.Genre.CreateGenre
 {
     public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommandRequest, CreateGenreCommandResponse>
     {
-        public Task<CreateGenreCommandResponse> Handle(CreateGenreCommandRequest request, CancellationToken cancellationToken)
+        private readonly IGenreService _genreService;
+
+        public CreateGenreCommandHandler(IGenreService genreService)
         {
-            throw new NotImplementedException();
+            _genreService = genreService;
+        }
+
+        public async Task<CreateGenreCommandResponse> Handle(CreateGenreCommandRequest request, CancellationToken cancellationToken)
+        {
+            var res = await _genreService.CreateGenre(new()
+            {
+                Name = request.Name
+            });
+
+            res.Url = UrlHelper.GetGenreUrl(res.Id);
+
+            var updateUrlRes = await _genreService.UpdateGenre(res);
+
+            return new CreateGenreCommandResponse
+            {
+                Genre = updateUrlRes
+            };
+
         }
     }
 }

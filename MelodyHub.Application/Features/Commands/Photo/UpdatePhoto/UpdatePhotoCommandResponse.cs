@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Photo.UpdatePhoto
 {
     public class UpdatePhotoCommandResponse
     {
+        public object Photo { get; set; }
     }
 }

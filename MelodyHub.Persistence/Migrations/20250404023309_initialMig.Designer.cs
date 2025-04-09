@@ -3,6 +3,7 @@ using System;
 using MelodyHub.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MelodyHub.Persistence.Migrations
 {
     [DbContext(typeof(MelodyHubDbContext))]
-    partial class MelodyHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250404023309_initialMig")]
+    partial class initialMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

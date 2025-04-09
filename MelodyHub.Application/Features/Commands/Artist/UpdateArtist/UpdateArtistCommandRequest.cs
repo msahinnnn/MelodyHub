@@ -9,6 +9,8 @@ namespace MelodyHub.Application.Features.Commands.Artist.UpdateArtist
 {
     public class UpdateArtistCommandRequest : IRequest<UpdateArtistCommandResponse>
     {
-
+        public int ArtistId { get; set; }
+        public string Name { get; set; }
+        public string About { get; set; }
     }
 }

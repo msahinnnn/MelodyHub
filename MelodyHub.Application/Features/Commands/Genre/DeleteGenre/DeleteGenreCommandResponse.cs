@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Genre.DeleteGenre
 {
     public class DeleteGenreCommandResponse
     {
+        public object Genre { get; set; }
     }
 }

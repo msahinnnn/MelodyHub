@@ -4,6 +4,9 @@ using Amazon.S3;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using MelodyHub.Application;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,10 +17,16 @@ builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
+
 builder.Services.AddLogging(logging => logging.AddConsole());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
+});
 
 builder.Services.AddSwaggerGen(c =>
 {

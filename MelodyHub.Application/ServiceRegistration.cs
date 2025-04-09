@@ -12,7 +12,11 @@ namespace MelodyHub.Application
     {
         public static void AddApplicationServices(this IServiceCollection collection)
         {
-            collection.AddMediatR(typeof(ServiceRegistration));
+            //collection.AddMediatR(typeof(ServiceRegistration));
+            collection.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly); // Mevcut assembly'deki handler'ları tarar
+            });
             collection.AddHttpClient();
         }
     }

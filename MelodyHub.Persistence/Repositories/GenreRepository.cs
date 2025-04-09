@@ -1,5 +1,6 @@
 ﻿using MelodyHub.Application.Repositories;
 using MelodyHub.Domain.Entitites;
+using MelodyHub.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MelodyHub.Persistence.Repositories
 {
     public class GenreRepository : BaseRepository<Genre>, IGenreRepository
     {
-        public GenreRepository(DbContext context) : base(context)
+        public GenreRepository(MelodyHubDbContext context) : base(context)
         {
         }
     }

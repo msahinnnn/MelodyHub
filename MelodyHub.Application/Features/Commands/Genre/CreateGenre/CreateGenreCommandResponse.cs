@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Genre.CreateGenre
 {
     public class CreateGenreCommandResponse
     {
+        public object Genre { get; set; }
     }
 }

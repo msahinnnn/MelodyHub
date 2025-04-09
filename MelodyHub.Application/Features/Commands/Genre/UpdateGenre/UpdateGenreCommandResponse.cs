@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Genre.UpdateGenre
 {
     public class UpdateGenreCommandResponse
     {
+        public object Genre { get; set; }
     }
 }

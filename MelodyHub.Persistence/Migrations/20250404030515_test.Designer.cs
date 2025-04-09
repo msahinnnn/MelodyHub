@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MelodyHub.Persistence.Migrations
 {
     [DbContext(typeof(MelodyHubDbContext))]
-    [Migration("20250403005911_initialMig")]
-    partial class initialMig
+    [Migration("20250404030515_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,6 +185,10 @@ namespace MelodyHub.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SongFileUrl")
                         .IsRequired()
                         .HasColumnType("text");
 

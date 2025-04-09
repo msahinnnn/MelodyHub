@@ -13,11 +13,16 @@ namespace MelodyHub.Infrastructure.Services.Storage
     public class AudioStorageService : IAudioStorageService
     {
         private readonly AmazonS3Client _s3Client;
-        private const string BucketName = ""; // 
+        private const string BucketName = "mymelody-hub"; 
 
         public AudioStorageService()
         {
             _s3Client = new();
+        }
+
+        public string GetBucketName()
+        {
+            return BucketName;
         }
 
         public async Task UploadSongAsync(string songId, Stream inputStream)
@@ -30,7 +35,7 @@ namespace MelodyHub.Infrastructure.Services.Storage
                 InputStream = inputStream,
                 ContentType = "audio/mp4"
             };
-            var res = await _s3Client.PutObjectAsync(request);
+            var res = await _s3Client.PutObjectAsync(request);       
         }
 
         public async Task DeleteSongAsync(string songId)

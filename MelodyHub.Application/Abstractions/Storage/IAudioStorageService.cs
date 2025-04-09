@@ -12,5 +12,6 @@ namespace MelodyHub.Application.Abstractions.Storage
         Task DeleteSongAsync(string songId);
         Task<Stream> GetSongAsync(string songId);
         Task UpdateSongAsync(string songId, Stream inputStream);
+        string GetBucketName();
     }
 }
