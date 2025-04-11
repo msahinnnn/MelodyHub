@@ -18,11 +18,18 @@ namespace MelodyHub.Application.Features.Commands.Album.UpdateAlbum
         }
         public async Task<UpdateAlbumCommandResponse> Handle(UpdateAlbumCommandRequest request, CancellationToken cancellationToken)
         {
-            var response = await _albumService.UpdateAlbum(new()
+            var entity = await _albumService.GetAlbumById(request.Id);
+
+            if (entity == null)
             {
-                Name = request.Name,
-                GenreId = request.GenreId,
-            });
+                throw new Exception("Album not found");
+            }
+
+            entity.Name = string.IsNullOrEmpty(request.Name) ? entity.Name : request.Name;
+            entity.GenreId = request.GenreId > 0 ? entity.GenreId : request.GenreId;
+
+
+            var response = await _albumService.UpdateAlbum(entity);
 
             return new UpdateAlbumCommandResponse
             {

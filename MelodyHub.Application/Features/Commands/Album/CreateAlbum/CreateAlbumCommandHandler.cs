@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MelodyHub.Application.Abstractions.Services;
+using MelodyHub.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,13 @@ namespace MelodyHub.Application.Features.Commands.Album.CreateAlbum
                 GenreId = request.GenreId
             });
 
+            response.Url = UrlHelper.GetAlbumUrl(response.Id);
+
+            var updateUrlRes = await _albumService.UpdateAlbum(response);
+
             return new CreateAlbumCommandResponse
             {
-                Album = response
+                Album = updateUrlRes
             };
         }
     }

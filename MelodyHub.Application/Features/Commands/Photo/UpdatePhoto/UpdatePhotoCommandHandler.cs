@@ -27,11 +27,19 @@ namespace MelodyHub.Application.Features.Commands.Photo.UpdatePhoto
 
             await _imageStorageService.UpdatePhotoAsync(request.Id.ToString(), request.EntityType, request.PhotoType, request.File.OpenReadStream());
 
-            var response = await _photoService.UpdatePhoto(new()
+
+            var entity = await _photoService.GetPhotoById(request.Id);
+
+            if (entity == null)
             {
-                Id = request.Id,
-                PhotoType = (Domain.Entitites.PhotoType)request.PhotoType
-            });
+                throw new Exception("Photo not found");
+            }
+
+            entity.UpdatedDate = DateTime.UtcNow;
+            entity.PhotoType = (Domain.Entitites.PhotoType)request.PhotoType;
+         
+
+            var response = await _photoService.UpdatePhoto(entity);
 
             return new UpdatePhotoCommandResponse
             {

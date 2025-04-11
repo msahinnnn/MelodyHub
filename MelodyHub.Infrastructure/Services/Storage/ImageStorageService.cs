@@ -36,10 +36,10 @@ namespace MelodyHub.Infrastructure.Services.Storage
                     _ => throw new ArgumentException($"Invalid PhotoType '{photoType}' for entityType '{entityType}'.")
                 },
                 EntityStorageType.Playlists => photoType == PhotoType.Playlist
-                    ? $"playlists/{entityId}.jpg"
+                    ? $"playlists/{entityId}/{entityId}.jpg"
                     : throw new ArgumentException($"Invalid PhotoType '{photoType}' for Playlists."),
                 EntityStorageType.Albums => photoType == PhotoType.Album
-                    ? $"albums/{entityId}.jpg"
+                    ? $"albums/{entityId}/{entityId}.jpg"
                     : throw new ArgumentException($"Invalid PhotoType '{photoType}' for Albums."),
                 _ => throw new ArgumentException($"Invalid entityType '{entityType}'.")
             };
