@@ -34,12 +34,4 @@
     <ProjectReference Include="..\MelodyHub.Domain\MelodyHub.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Queries\Album\" />
-    <Folder Include="Features\Queries\Artist\" />
-    <Folder Include="Features\Queries\Genre\" />
-    <Folder Include="Features\Queries\Song\" />
-    <Folder Include="Features\Queries\Photo\" />
-  </ItemGroup>
-
 </Project>

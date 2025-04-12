@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MelodyHub.Application.Helpers
 {
-    public static class VideoDurationHelper
+    public static class AudioDurationHelper
     {
         public static string EstimateMp4Duration(IFormFile file)
         {

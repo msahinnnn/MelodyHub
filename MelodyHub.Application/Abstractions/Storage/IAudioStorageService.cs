@@ -8,10 +8,10 @@ namespace MelodyHub.Application.Abstractions.Storage
 {
     public interface IAudioStorageService
     {
-        Task UploadSongAsync(string songId, Stream inputStream);
-        Task DeleteSongAsync(string songId);
-        Task<Stream> GetSongAsync(string songId);
-        Task UpdateSongAsync(string songId, Stream inputStream);
+        Task UploadSongAsync(string songId, int albumId, Stream inputStream);
+        Task DeleteSongAsync(string songId, int albumId);
+        Task<Stream> GetSongAsync(string songId, int albumId);
+        Task UpdateSongAsync(string songId, int albumId, Stream inputStream);
         string GetBucketName();
     }
 }

@@ -2,10 +2,12 @@
 using MelodyHub.Application.Features.Commands.Album.CreateAlbum;
 using MelodyHub.Application.Features.Commands.Album.DeleteAlbum;
 using MelodyHub.Application.Features.Commands.Album.UpdateAlbum;
-using MelodyHub.Application.Features.Commands.Artist.CreateArtist;
-using MelodyHub.Application.Features.Commands.Artist.DeleteArtist;
-using MelodyHub.Application.Features.Commands.Artist.UpdateArtist;
-using Microsoft.AspNetCore.Http;
+using MelodyHub.Application.Features.Queries.Album.GetAll;
+using MelodyHub.Application.Features.Queries.Album.GetByArtistId;
+using MelodyHub.Application.Features.Queries.Album.GetByGenreId;
+using MelodyHub.Application.Features.Queries.Album.GetById;
+using MelodyHub.Application.Features.Queries.Album.GetByName;
+using MelodyHub.Application.Features.Queries.Album.GetByUrl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MelodyHub.API.Controllers
@@ -20,6 +22,49 @@ namespace MelodyHub.API.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllAlbums([FromQuery] GetAllAlbumsQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByArtistId([FromQuery] GetByArtistIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByGenreId([FromQuery] GetByGenreIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetById([FromQuery] GetByIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByName([FromQuery] GetByNameQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateAlbum([FromBody] CreateAlbumCommandRequest request)

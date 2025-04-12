@@ -9,7 +9,7 @@ namespace MelodyHub.Application.Features.Commands.Song.DeleteSong
 {
     public class DeleteSongCommandRequest : IRequest<DeleteSongCommandResponse>
     {
-        
+     public int Id { get; set; }
     }
     
 }

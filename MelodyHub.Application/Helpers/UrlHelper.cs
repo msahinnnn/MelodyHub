@@ -25,7 +25,7 @@ namespace MelodyHub.Application.Helpers
 
         public static string GetPlaylistPictureUrl(int playlistId) => $"playlists/{playlistId}.jpg";
 
-        public static string GetSongSoundUrl(int songId, string bucketName) => $"https://{bucketName}.s3.amazonaws.com/songs/{songId}.mp4";
+        public static string GetSongSoundUrl(int songId,int albumId, string bucketName) => $"https://{bucketName}.s3.amazonaws.com/songs/album_{albumId}/{songId}.mp4";
        
     }
 }

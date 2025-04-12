@@ -8,5 +8,6 @@ namespace MelodyHub.Application.Features.Commands.Song.UpdateSong
 {
     public class UpdateSongCommandResponse
     {
+        public object Song { get; set; }
     }
 }

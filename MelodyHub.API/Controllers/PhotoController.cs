@@ -1,10 +1,11 @@
 ﻿using MediatR;
-using MelodyHub.Application.Features.Commands.Genre.CreateGenre;
-using MelodyHub.Application.Features.Commands.Genre.DeleteGenre;
-using MelodyHub.Application.Features.Commands.Genre.UpdateGenre;
 using MelodyHub.Application.Features.Commands.Photo.CreatePhoto;
 using MelodyHub.Application.Features.Commands.Photo.DeletePhoto;
 using MelodyHub.Application.Features.Commands.Photo.UpdatePhoto;
+using MelodyHub.Application.Features.Queries.Photo.GetAll;
+using MelodyHub.Application.Features.Queries.Photo.GetById;
+using MelodyHub.Application.Features.Queries.Photo.GetByParentId;
+using MelodyHub.Application.Features.Queries.Photo.GetByUrl;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,34 @@ namespace MelodyHub.API.Controllers
         public PhotoController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetById([FromQuery] GetByIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByUrl([FromQuery] GetByUrlQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByParentId([FromQuery] GetByParentIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPost]
